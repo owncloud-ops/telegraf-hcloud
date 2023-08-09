@@ -4,7 +4,7 @@ GOFUMPT_PACKAGE_VERSION := v0.5.0
 GOLANGCI_LINT_PACKAGE_VERSION := v1.53.3
 
 SHELL := bash
-NAME := errors
+NAME := telegraf-hcloud
 IMPORT := github.com/owncloud-ops/$(NAME)
 DIST := dist
 DIST_DIRS := $(DIST)
