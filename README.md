@@ -4,7 +4,7 @@
 [![Docker Hub](https://img.shields.io/badge/docker-latest-blue.svg?logo=docker&logoColor=white)](https://hub.docker.com/r/owncloudops/telegraf-hcloud)
 [![Quay.io](https://img.shields.io/badge/quay-latest-blue.svg?logo=docker&logoColor=white)](https://quay.io/repository/owncloudops/telegraf-hcloud)
 
-Gather metrics Hetzner Cloud resources.
+Gather metrics from Hetzner Cloud resources.
 
 ## Configuration
 
