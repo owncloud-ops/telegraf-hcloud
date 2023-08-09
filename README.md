@@ -16,7 +16,7 @@ Gather metrics from Hetzner Cloud resources.
   ]
 
   ## Hetzner API token.
-  # token = ""
+  token = ""
 ```
 
 ## Metrics

@@ -32,7 +32,7 @@ const sampleConfig = `
   ]
 
   ## Hetzner API token.
-  # token = ""
+  token = ""
 `
 
 // Init is for setup, and validating config.
