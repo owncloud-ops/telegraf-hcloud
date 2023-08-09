@@ -3,7 +3,7 @@ repository:
   name: telegraf-hcloud
   description: Gather metrics from Hetzner Cloud resources
   homepage: https://hub.docker.com/r/owncloudops/telegraf-hcloud
-  topics: oci, container, telegraf, hcloud
+  topics: telegraf, hcloud
 
   private: false
   has_issues: true

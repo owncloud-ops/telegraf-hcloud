@@ -52,7 +52,7 @@ trigger:
 
 ---
 kind: pipeline
-name: container
+name: build
 
 platform:
   os: linux
@@ -74,37 +74,11 @@ steps:
     volumes:
       - name: godeps
         path: /go
-    depends_on:
-      - generate
 
   - name: executable
     image: docker.io/golang:1.20
     commands:
       - dist/telegraf-hcloud --help
-    depends_on:
-      - build
-
-  - name: tags
-    image: quay.io/thegeeklab/docker-autotag
-    environment:
-      DOCKER_AUTOTAG_FORCE_LATEST: True
-      DOCKER_AUTOTAG_IGNORE_PRERELEASE: True
-      DOCKER_AUTOTAG_OUTPUT_FILE: .tags
-      DOCKER_AUTOTAG_VERSION: ${DRONE_TAG}
-    depends_on:
-      - executable
-
-  - name: dryrun
-    image: docker.io/plugins/docker:20
-    settings:
-      dockerfile: Dockerfile
-      dry_run: true
-      repo: owncloudops/${DRONE_REPO_NAME}
-    when:
-      ref:
-        - refs/pull/**
-    depends_on:
-      - tags
 
   - name: changelog
     image: quay.io/thegeeklab/git-chglog
@@ -112,41 +86,6 @@ steps:
       - git fetch -tq
       - git-chglog --no-color --no-emoji ${DRONE_TAG:---next-tag unreleased unreleased}
       - git-chglog --no-color --no-emoji -o CHANGELOG.md ${DRONE_TAG:---next-tag unreleased unreleased}
-    depends_on:
-      - dryrun
-
-  - name: publish-dockerhub
-    image: docker.io/plugins/docker:20
-    settings:
-      dockerfile: Dockerfile
-      password:
-        from_secret: docker_password
-      repo: owncloudops/${DRONE_REPO_NAME}
-      username:
-        from_secret: docker_username
-    when:
-      ref:
-        - refs/heads/main
-        - refs/tags/**
-    depends_on:
-      - changelog
-
-  - name: publish-quay
-    image: docker.io/plugins/docker
-    settings:
-      dockerfile: Dockerfile
-      password:
-        from_secret: quay_password
-      registry: quay.io
-      repo: quay.io/owncloudops/${DRONE_REPO_NAME}
-      username:
-        from_secret: quay_username
-    when:
-      ref:
-        - refs/heads/main
-        - refs/tags/**
-    depends_on:
-      - changelog
 
   - name: release
     image: docker.io/plugins/github-release
@@ -159,9 +98,6 @@ steps:
     when:
       ref:
         - refs/tags/**
-    depends_on:
-      - publish-dockerhub
-      - publish-quay
 
 trigger:
   ref:
@@ -181,30 +117,6 @@ platform:
   arch: amd64
 
 steps:
-  - name: pushrm-dockerhub
-    image: docker.io/chko/docker-pushrm:1
-    environment:
-      DOCKER_PASS:
-        from_secret: docker_password
-      DOCKER_USER:
-        from_secret: docker_username
-      PUSHRM_FILE: README.md
-      PUSHRM_TARGET: owncloudops/${DRONE_REPO_NAME}
-    when:
-      status:
-        - success
-
-  - name: pushrm-quay
-    image: docker.io/chko/docker-pushrm:1
-    environment:
-      APIKEY__QUAY_IO:
-        from_secret: quay_token
-      PUSHRM_FILE: README.md
-      PUSHRM_TARGET: quay.io/owncloudops/${DRONE_REPO_NAME}
-    when:
-      status:
-        - success
-
   - name: notify
     image: docker.io/plugins/slack
     settings:
@@ -225,6 +137,6 @@ trigger:
     - failure
 
 depends_on:
-  - container
+  - build
 
 ...

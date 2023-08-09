@@ -52,12 +52,6 @@ make generate build
 ./dist/telegraf-hcloud --help
 ```
 
-To build the container use:
-
-```Shell
-docker build -f Dockerfile -t telegraf-hcloud:latest .
-```
-
 ## License
 
 This project is licensed under the Apache 2.0 License - see the [LICENSE](https://github.com/owncloud-ops/telegraf-hcloud/blob/main/LICENSE) file for details.
