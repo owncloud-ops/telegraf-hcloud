@@ -68,9 +68,10 @@ steps:
         path: /go
 
   - name: build
-    image: docker.io/golang:1.20
+    image: techknowlogick/xgo:go-1.20.x
     commands:
-      - make build
+      - ln -s /drone/src /source
+      - make release
     volumes:
       - name: godeps
         path: /go
@@ -78,7 +79,7 @@ steps:
   - name: executable
     image: docker.io/golang:1.20
     commands:
-      - dist/telegraf-hcloud --help
+      - $(find dist/ -executable -type f -iname ${DRONE_REPO_NAME}-linux-amd64) --help
 
   - name: changelog
     image: quay.io/thegeeklab/git-chglog
@@ -92,6 +93,8 @@ steps:
     settings:
       api_key:
         from_secret: github_token
+      files:
+        - dist/*
       note: CHANGELOG.md
       overwrite: true
       title: ${DRONE_TAG}
