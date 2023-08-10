@@ -1,8 +1,6 @@
 # telegraf-hcloud
 
 [![Build Status](https://drone.owncloud.com/api/badges/owncloud-ops/telegraf-hcloud/status.svg)](https://drone.owncloud.com/owncloud-ops/telegraf-hcloud)
-[![Docker Hub](https://img.shields.io/badge/docker-latest-blue.svg?logo=docker&logoColor=white)](https://hub.docker.com/r/owncloudops/telegraf-hcloud)
-[![Quay.io](https://img.shields.io/badge/quay-latest-blue.svg?logo=docker&logoColor=white)](https://quay.io/repository/owncloudops/telegraf-hcloud)
 
 Gather metrics from Hetzner Cloud resources.
 
