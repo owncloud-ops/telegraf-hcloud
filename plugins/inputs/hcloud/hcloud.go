@@ -88,7 +88,7 @@ func (h *Hcloud) Gather(acc telegraf.Accumulator) error {
 			acc.AddError(err)
 		}
 
-		tags["id"] = strconv.Itoa(lb.ID)
+		tags["id"] = strconv.FormatInt(lb.ID, 16)
 		tags["instance"] = lb.Name
 		tags["type"] = lb.LoadBalancerType.Name
 		tags["datacenter"] = lb.Location.Name
