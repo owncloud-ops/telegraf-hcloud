@@ -14,7 +14,7 @@ const defaultPollInterval = 2 * time.Minute
 
 var (
 	pollInterval         = flag.Duration("poll_interval", defaultPollInterval, "how often to send metrics")
-	pollIntervalDisabled = flag.Bool("poll_interval_disabled", false, "how often to send metrics")
+	pollIntervalDisabled = flag.Bool("poll_interval_disabled", false, "set to true to disable polling")
 	configFile           = flag.String("config", "", "path to the config file for this plugin")
 	err                  error
 )
