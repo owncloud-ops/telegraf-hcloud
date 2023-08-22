@@ -39,11 +39,6 @@ const sampleConfig = `
   token = ""
 `
 
-// Init is for setup, and validating config.
-func (h *Hcloud) Init() error {
-	return nil
-}
-
 // SampleConfig returns the default configuration of the Cloudwatch input plugin.
 func (h *Hcloud) SampleConfig() string {
 	return fmt.Sprintf(sampleConfig, HcloudResourceLoadBalancer)
