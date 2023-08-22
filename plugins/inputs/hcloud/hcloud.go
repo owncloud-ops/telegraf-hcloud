@@ -2,6 +2,7 @@ package hcloud
 
 import (
 	"context"
+	"fmt"
 	"strconv"
 	"time"
 
@@ -9,11 +10,14 @@ import (
 	"github.com/influxdata/telegraf"
 	"github.com/influxdata/telegraf/config"
 	"github.com/influxdata/telegraf/plugins/inputs"
+	"golang.org/x/exp/slices"
 )
 
 const (
 	defaultHcloudClientTimeout = 5 * time.Second
 	defaultHcloudMetricSteps   = 60
+
+	HcloudResourceLoadBalancer = "load_balancers"
 )
 
 // Hcloud - plugin main struct.
@@ -28,21 +32,16 @@ type Hcloud struct {
 const sampleConfig = `
   ## List of Hetzner Cloud resources to monitor.
   resources = [
-    "load_balancers"
+    "%s"
   ]
 
   ## Hetzner API token.
   token = ""
 `
 
-// Init is for setup, and validating config.
-func (h *Hcloud) Init() error {
-	return nil
-}
-
 // SampleConfig returns the default configuration of the Cloudwatch input plugin.
 func (h *Hcloud) SampleConfig() string {
-	return sampleConfig
+	return fmt.Sprintf(sampleConfig, HcloudResourceLoadBalancer)
 }
 
 // Description returns a one-sentence description on the Cloudwatch input plugin.
@@ -53,6 +52,8 @@ func (h *Hcloud) Description() string {
 // Gather takes in an accumulator and adds the metrics that the Input
 // gathers. This is called every "interval".
 func (h *Hcloud) Gather(acc telegraf.Accumulator) error {
+	h.setDefaultValues()
+
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(h.Timeout))
 	defer cancel()
 
@@ -62,14 +63,49 @@ func (h *Hcloud) Gather(acc telegraf.Accumulator) error {
 
 	now := time.Now()
 
+	if slices.Contains(h.Resources, HcloudResourceLoadBalancer) {
+		h.fetchLoadBalancer(ctx, acc, now)
+	}
+
+	return nil
+}
+
+func (h *Hcloud) setDefaultValues() {
+	if len(h.Resources) == 0 {
+		h.Resources = []string{HcloudResourceLoadBalancer}
+	}
+}
+
+func (h *Hcloud) createHcloudClient(token string) *hcloud.Client {
+	client := hcloud.NewClient(hcloud.WithToken(token))
+
+	return client
+}
+
+func (h *Hcloud) getTimeSeries(ts map[string][]hcloud.LoadBalancerMetricsValue, name string) (float64, error) {
+	if metric, ok := ts[name]; ok {
+		if len(metric) > 0 {
+			value, err := strconv.ParseFloat(metric[0].Value, 64)
+			if err != nil {
+				return 0, err
+			}
+
+			return value, nil
+		}
+	}
+
+	return 0, nil
+}
+
+func (h *Hcloud) fetchLoadBalancer(ctx context.Context, acc telegraf.Accumulator, start time.Time) {
 	lbs, err := h.client.LoadBalancer.All(ctx)
 	if err != nil {
 		acc.AddError(err)
 	}
 
 	lbOpts := hcloud.LoadBalancerGetMetricsOpts{
-		Start: now,
-		End:   now,
+		Start: start,
+		End:   time.Now(),
 		Types: []hcloud.LoadBalancerMetricType{
 			hcloud.LoadBalancerMetricOpenConnections,
 			hcloud.LoadBalancerMetricConnectionsPerSecond,
@@ -80,8 +116,8 @@ func (h *Hcloud) Gather(acc telegraf.Accumulator) error {
 	}
 
 	for _, lb := range lbs {
-		tags := make(map[string]string, 0)
-		fields := make(map[string]interface{}, 0)
+		tags := map[string]string{}
+		fields := map[string]interface{}{}
 
 		metrics, _, err := h.client.LoadBalancer.GetMetrics(ctx, lb, lbOpts)
 		if err != nil {
@@ -130,31 +166,8 @@ func (h *Hcloud) Gather(acc telegraf.Accumulator) error {
 			fields["requests_per_second"] = requestsPerSecond
 		}
 
-		acc.AddFields("hcloud_load_balancer", fields, tags, now)
+		acc.AddFields("hcloud_load_balancer", fields, tags, start)
 	}
-
-	return nil
-}
-
-func (h *Hcloud) createHcloudClient(token string) *hcloud.Client {
-	client := hcloud.NewClient(hcloud.WithToken(token))
-
-	return client
-}
-
-func (h *Hcloud) getTimeSeries(ts map[string][]hcloud.LoadBalancerMetricsValue, name string) (float64, error) {
-	if metric, ok := ts[name]; ok {
-		if len(metric) > 0 {
-			value, err := strconv.ParseFloat(metric[0].Value, 64)
-			if err != nil {
-				return 0, err
-			}
-
-			return value, nil
-		}
-	}
-
-	return 0, nil
 }
 
 func init() {

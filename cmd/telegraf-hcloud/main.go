@@ -10,7 +10,7 @@ import (
 	_ "github.owncloud.com/owncloud-ops/telegraf-hcloud/plugins/inputs/hcloud"
 )
 
-const defaultPollInterval = 2 * time.Minute
+const defaultPollInterval = 1 * time.Minute
 
 var (
 	pollInterval         = flag.Duration("poll_interval", defaultPollInterval, "how often to send metrics")
