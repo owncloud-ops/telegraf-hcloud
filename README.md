@@ -40,7 +40,7 @@ hcloud_load_balancer,datacenter=nbg1,id=44834,instance=download,type=lb21 open_c
 
 ## Build
 
-Make sure you have a working Go environment, for further reference or a guide take a look at the [install instructions](https://golang.org/doc/install.html). This project requires Go >= v1.20.
+Make sure you have a working Go environment, for further reference or a guide take a look at the [install instructions](https://golang.org/doc/install.html). This project requires Go >= v1.21.
 
 ```Shell
 git clone https://github.owncloud.com/owncloud-ops/telegraf-hcloud.git
