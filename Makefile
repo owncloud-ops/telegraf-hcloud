@@ -20,7 +20,7 @@ XGO_PACKAGE ?= src.techknowlogick.com/xgo@latest
 
 GENERATE ?=
 XGO_PACKAGE ?= src.techknowlogick.com/xgo@latest
-XGO_VERSION := go-1.20.x
+XGO_VERSION := go-1.21.x
 XGO_TARGETS ?= linux/amd64,linux/arm-6,linux/arm-7,linux/arm64
 
 TAGS ?= netgo

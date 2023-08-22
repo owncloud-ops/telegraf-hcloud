@@ -9,7 +9,7 @@ platform:
 
 steps:
   - name: deps
-    image: docker.io/golang:1.20
+    image: docker.io/golang:1.21
     commands:
       - make deps
     volumes:
@@ -17,7 +17,7 @@ steps:
         path: /go
 
   - name: generate
-    image: docker.io/golang:1.20
+    image: docker.io/golang:1.21
     commands:
       - make generate
     volumes:
@@ -25,7 +25,7 @@ steps:
         path: /go
 
   - name: lint
-    image: docker.io/golang:1.20
+    image: docker.io/golang:1.21
     commands:
       - make lint
     volumes:
@@ -33,7 +33,7 @@ steps:
         path: /go
 
   - name: test
-    image: docker.io/golang:1.20
+    image: docker.io/golang:1.21
     commands:
       - make test
     volumes:
@@ -60,7 +60,7 @@ platform:
 
 steps:
   - name: generate
-    image: docker.io/golang:1.20
+    image: docker.io/golang:1.21
     commands:
       - make generate
     volumes:
@@ -68,7 +68,7 @@ steps:
         path: /go
 
   - name: build
-    image: techknowlogick/xgo:go-1.20.x
+    image: techknowlogick/xgo:go-1.21.x
     commands:
       - ln -s /drone/src /source
       - make release
@@ -77,7 +77,7 @@ steps:
         path: /go
 
   - name: executable
-    image: docker.io/golang:1.20
+    image: docker.io/golang:1.21
     commands:
       - $(find dist/ -executable -type f -iname ${DRONE_REPO_NAME}-linux-amd64) --help
 
@@ -141,5 +141,3 @@ trigger:
 
 depends_on:
   - build
-
-...
