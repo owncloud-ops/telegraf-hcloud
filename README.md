@@ -23,7 +23,6 @@ Gather metrics from Hetzner Cloud resources.
   - tags:
     - location
     - name
-    - type
   - fields:
     - open_connections (float)
     - requests_per_second (float)
@@ -31,11 +30,20 @@ Gather metrics from Hetzner Cloud resources.
     - bandwidth_out (float)
     - connections_per_second (float)
     - max_connections (float)
+- hcloud_load_balancer_info
+  - tags:
+    - location
+    - name
+    - protected
+    - type
+  - fields:
+    - info (float)
 
 ## Example Output
 
 ```plain
-hcloud_load_balancer,location=nbg1,name=download,type=lb21 open_connections=210,requests_per_second=0,bandwidth_in=948.333333,bandwidth_out=12049.333333,connections_per_second=2.333333 1691592199806644652
+hcloud_load_balancer,location=nbg1,name=download,protected=false,type=lb11 info=1i 1692799714846451262
+hcloud_load_balancer,location=nbg1,name=download open_connections=43,requests_per_second=0,max_connections=10000i,bandwidth_in=2886,bandwidth_out=4091507.666667,connections_per_second=3.333333 1692799714846451262
 ```
 
 ## Build
