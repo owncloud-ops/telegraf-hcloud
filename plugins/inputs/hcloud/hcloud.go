@@ -120,6 +120,7 @@ func (h *Hcloud) fetchLoadBalancer(ctx context.Context, acc telegraf.Accumulator
 		metaTags := map[string]string{}
 		metaFields := map[string]interface{}{}
 
+		metaTags["id"] = strconv.FormatInt(lb.ID, 16)
 		metaTags["name"] = lb.Name
 		metaTags["location"] = lb.Location.Name
 		metaTags["type"] = lb.LoadBalancerType.Name
