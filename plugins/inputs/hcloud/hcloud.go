@@ -124,7 +124,6 @@ func (h *Hcloud) fetchLoadBalancer(ctx context.Context, acc telegraf.Accumulator
 			acc.AddError(err)
 		}
 
-		tags["id"] = strconv.FormatInt(lb.ID, 16)
 		tags["instance"] = lb.Name
 		tags["type"] = lb.LoadBalancerType.Name
 		tags["datacenter"] = lb.Location.Name
