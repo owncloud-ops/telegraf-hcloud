@@ -21,8 +21,8 @@ Gather metrics from Hetzner Cloud resources.
 
 - hcloud_load_balancer
   - tags:
-    - datacenter
-    - instance
+    - location
+    - name
     - type
   - fields:
     - open_connections (float)
@@ -34,7 +34,7 @@ Gather metrics from Hetzner Cloud resources.
 ## Example Output
 
 ```plain
-hcloud_load_balancer,datacenter=nbg1,instance=download,type=lb21 open_connections=210,requests_per_second=0,bandwidth_in=948.333333,bandwidth_out=12049.333333,connections_per_second=2.333333 1691592199806644652
+hcloud_load_balancer,location=nbg1,name=download,type=lb21 open_connections=210,requests_per_second=0,bandwidth_in=948.333333,bandwidth_out=12049.333333,connections_per_second=2.333333 1691592199806644652
 ```
 
 ## Build

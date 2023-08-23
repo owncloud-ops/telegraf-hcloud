@@ -124,9 +124,9 @@ func (h *Hcloud) fetchLoadBalancer(ctx context.Context, acc telegraf.Accumulator
 			acc.AddError(err)
 		}
 
-		tags["instance"] = lb.Name
+		tags["name"] = lb.Name
 		tags["type"] = lb.LoadBalancerType.Name
-		tags["datacenter"] = lb.Location.Name
+		tags["location"] = lb.Location.Name
 
 		ts := metrics.TimeSeries
 
