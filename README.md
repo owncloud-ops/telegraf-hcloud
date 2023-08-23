@@ -30,6 +30,7 @@ Gather metrics from Hetzner Cloud resources.
     - bandwidth_in (float)
     - bandwidth_out (float)
     - connections_per_second (float)
+    - max_connections (float)
 
 ## Example Output
 

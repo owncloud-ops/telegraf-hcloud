@@ -116,6 +116,20 @@ func (h *Hcloud) fetchLoadBalancer(ctx context.Context, acc telegraf.Accumulator
 	}
 
 	for _, lb := range lbs {
+		// add info field
+		metaTags := map[string]string{}
+		metaFields := map[string]interface{}{}
+
+		metaTags["name"] = lb.Name
+		metaTags["location"] = lb.Location.Name
+		metaTags["type"] = lb.LoadBalancerType.Name
+		metaTags["protected"] = strconv.FormatBool(lb.Protection.Delete)
+
+		metaFields["info"] = 1
+
+		acc.AddFields("hcloud_load_balancer", metaFields, metaTags, start)
+
+		// add metrics
 		tags := map[string]string{}
 		fields := map[string]interface{}{}
 
@@ -125,7 +139,6 @@ func (h *Hcloud) fetchLoadBalancer(ctx context.Context, acc telegraf.Accumulator
 		}
 
 		tags["name"] = lb.Name
-		tags["type"] = lb.LoadBalancerType.Name
 		tags["location"] = lb.Location.Name
 
 		ts := metrics.TimeSeries
@@ -164,6 +177,8 @@ func (h *Hcloud) fetchLoadBalancer(ctx context.Context, acc telegraf.Accumulator
 		} else {
 			fields["requests_per_second"] = requestsPerSecond
 		}
+
+		fields["max_connections"] = lb.LoadBalancerType.MaxConnections
 
 		acc.AddFields("hcloud_load_balancer", fields, tags, start)
 	}
