@@ -5,7 +5,7 @@ go 1.21
 require (
 	github.com/hetznercloud/hcloud-go/v2 v2.2.0
 	github.com/influxdata/telegraf v1.27.4
-	golang.org/x/exp v0.0.0-20230626212559-97b1e661b5df
+	golang.org/x/exp v0.0.0-20230817173708-d852ddb80c63
 )
 
 require (
