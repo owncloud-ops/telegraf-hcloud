@@ -54,17 +54,12 @@ func (h *Hcloud) Description() string {
 func (h *Hcloud) Gather(acc telegraf.Accumulator) error {
 	h.setDefaultValues()
 
-	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(h.Timeout))
-	defer cancel()
-
 	if h.client == nil {
 		h.client = h.createHcloudClient(h.Token)
 	}
 
-	now := time.Now()
-
 	if slices.Contains(h.Resources, HcloudResourceLoadBalancer) {
-		h.fetchLoadBalancer(ctx, acc, now)
+		h.gatherLoadBalancerStats(acc)
 	}
 
 	return nil
@@ -97,15 +92,20 @@ func (h *Hcloud) getTimeSeries(ts map[string][]hcloud.LoadBalancerMetricsValue, 
 	return 0, nil
 }
 
-func (h *Hcloud) fetchLoadBalancer(ctx context.Context, acc telegraf.Accumulator, start time.Time) {
+func (h *Hcloud) gatherLoadBalancerStats(acc telegraf.Accumulator) {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(h.Timeout))
+
 	lbs, err := h.client.LoadBalancer.All(ctx)
 	if err != nil {
 		acc.AddError(err)
 	}
 
+	defer cancel()
+
+	now := time.Now()
 	lbOpts := hcloud.LoadBalancerGetMetricsOpts{
-		Start: start,
-		End:   time.Now(),
+		Start: now,
+		End:   now,
 		Types: []hcloud.LoadBalancerMetricType{
 			hcloud.LoadBalancerMetricOpenConnections,
 			hcloud.LoadBalancerMetricConnectionsPerSecond,
@@ -128,7 +128,7 @@ func (h *Hcloud) fetchLoadBalancer(ctx context.Context, acc telegraf.Accumulator
 
 		metaFields["info"] = 1
 
-		acc.AddFields("hcloud_load_balancer", metaFields, metaTags, start)
+		acc.AddFields("hcloud_load_balancer", metaFields, metaTags, now)
 
 		// add metrics
 		tags := map[string]string{}
@@ -181,7 +181,7 @@ func (h *Hcloud) fetchLoadBalancer(ctx context.Context, acc telegraf.Accumulator
 
 		fields["max_connections"] = lb.LoadBalancerType.MaxConnections
 
-		acc.AddFields("hcloud_load_balancer", fields, tags, start)
+		acc.AddFields("hcloud_load_balancer", fields, tags, now)
 	}
 }
 
