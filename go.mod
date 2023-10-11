@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	github.com/hetznercloud/hcloud-go/v2 v2.2.0
-	github.com/influxdata/telegraf v1.28.1
+	github.com/influxdata/telegraf v1.28.2
 	golang.org/x/exp v0.0.0-20231006140011-7918f672742d
 )
 
@@ -42,10 +42,10 @@ require (
 	github.com/stoewer/go-strcase v1.2.0 // indirect
 	github.com/tarm/serial v0.0.0-20180830185346-98f6abe2eb07 // indirect
 	github.com/youmark/pkcs8 v0.0.0-20201027041543-1326539a0a0a // indirect
-	golang.org/x/crypto v0.12.0 // indirect
-	golang.org/x/net v0.14.0 // indirect
+	golang.org/x/crypto v0.13.0 // indirect
+	golang.org/x/net v0.15.0 // indirect
 	golang.org/x/sys v0.13.0 // indirect
-	golang.org/x/text v0.12.0 // indirect
+	golang.org/x/text v0.13.0 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20230717213848-3f92550aa753 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20230720185612-659f7aaaa771 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
