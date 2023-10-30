@@ -52,29 +52,19 @@ trigger:
 
 ---
 kind: pipeline
-name: build
+type: docker
+name: build-binaries
 
 platform:
   os: linux
   arch: amd64
 
 steps:
-  - name: generate
-    image: docker.io/golang:1.21
-    commands:
-      - make generate
-    volumes:
-      - name: godeps
-        path: /go
-
   - name: build
-    image: techknowlogick/xgo:go-1.21.x
+    image: docker.io/techknowlogick/xgo:go-1.21.x
     commands:
       - ln -s /drone/src /source
       - make release
-    volumes:
-      - name: godeps
-        path: /go
 
   - name: executable
     image: docker.io/golang:1.21
@@ -85,10 +75,10 @@ steps:
     image: quay.io/thegeeklab/git-chglog
     commands:
       - git fetch -tq
-      - git-chglog --no-color --no-emoji ${DRONE_TAG:---next-tag unreleased unreleased}
       - git-chglog --no-color --no-emoji -o CHANGELOG.md ${DRONE_TAG:---next-tag unreleased unreleased}
+      - cat CHANGELOG.md
 
-  - name: release
+  - name: publish
     image: docker.io/plugins/github-release
     settings:
       api_key:
@@ -113,6 +103,7 @@ depends_on:
 
 ---
 kind: pipeline
+type: docker
 name: notifications
 
 platform:
@@ -140,4 +131,4 @@ trigger:
     - failure
 
 depends_on:
-  - build
+  - build-binaries

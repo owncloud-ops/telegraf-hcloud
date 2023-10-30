@@ -20,8 +20,6 @@ XGO_PACKAGE ?= src.techknowlogick.com/xgo@latest
 GOTESTSUM_PACKAGE ?= gotest.tools/gotestsum@latest
 
 GENERATE ?=
-XGO_PACKAGE ?= src.techknowlogick.com/xgo@latest
-GOTESTSUM_PACKAGE ?= gotest.tools/gotestsum@latest
 XGO_VERSION := go-1.21.x
 XGO_TARGETS ?= linux/amd64,linux/arm-6,linux/arm-7,linux/arm64
 
@@ -47,7 +45,7 @@ all: build
 .PHONY: clean
 clean:
 	$(GO) clean -i ./...
-	rm -rf $(DIST_DIRS)
+	@rm -rf $(DIST_DIRS)
 
 .PHONY: fmt
 fmt:
@@ -75,7 +73,7 @@ $(DIST)/$(NAME): $(SOURCES)
 	$(GO) build -v -tags '$(TAGS)' -ldflags '-extldflags "-static" $(LDFLAGS)' -o $@ ./cmd/$(NAME)
 
 $(DIST_DIRS):
-	mkdir -p $(DIST_DIRS)
+	@mkdir -p $(DIST_DIRS)
 
 .PHONY: xgo
 xgo: | $(DIST_DIRS)
