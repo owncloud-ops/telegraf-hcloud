@@ -55,7 +55,7 @@ Make sure you have a working Go environment, for further reference or a guide ta
 git clone https://github.owncloud.com/owncloud-ops/telegraf-hcloud.git
 cd telegraf-hcloud
 
-make generate build
+make build
 ./dist/telegraf-hcloud --help
 ```
 
