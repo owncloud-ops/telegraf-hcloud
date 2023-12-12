@@ -30,13 +30,13 @@ type Hcloud struct {
 }
 
 const sampleConfig = `
-  ## List of Hetzner Cloud resources to monitor.
-  resources = [
-    "%s"
-  ]
+	## List of Hetzner Cloud resources to monitor.
+	resources = [
+		"%s"
+	]
 
-  ## Hetzner API token.
-  token = ""
+	## Hetzner API token.
+	token = ""
 `
 
 // SampleConfig returns the default configuration of the Cloudwatch input plugin.
