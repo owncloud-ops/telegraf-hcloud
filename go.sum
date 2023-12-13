@@ -433,8 +433,8 @@ github.com/hashicorp/packer-plugin-sdk v0.3.2 h1:4Kqq7B8CRDMbfZmkloyz11t1hfqazJu
 github.com/hashicorp/packer-plugin-sdk v0.3.2/go.mod h1:XZRvL9kRqJJtB6rf9Lu2zWLJbf2/4ImWXDjp9O9UQGE=
 github.com/hashicorp/serf v0.10.1 h1:Z1H2J60yRKvfDYAOZLd2MU0ND4AH/WDz7xYHDWQsIPY=
 github.com/hashicorp/serf v0.10.1/go.mod h1:yL2t6BqATOLGc5HF7qbFkTfXoPIY0WZdWHfEvMqbG+4=
-github.com/hetznercloud/hcloud-go/v2 v2.5.0 h1:FkfiqB2Bz2mLSQqOskWULpmVRYOQgFy7k0hfIuXv4YI=
-github.com/hetznercloud/hcloud-go/v2 v2.5.0/go.mod h1:y75vdFT0eNNnYyGWO55Qv0LI23kSgsQZl3Gyy0KMrI4=
+github.com/hetznercloud/hcloud-go/v2 v2.5.1 h1:tJQxd+Qyd9CwGOFL0og80zZ3a4Z5p9+iIRTnUPlvOgc=
+github.com/hetznercloud/hcloud-go/v2 v2.5.1/go.mod h1:y75vdFT0eNNnYyGWO55Qv0LI23kSgsQZl3Gyy0KMrI4=
 github.com/huandu/xstrings v1.3.3 h1:/Gcsuc1x8JVbJ9/rlye4xZnVAbEkGauT8lbebqcQws4=
 github.com/huandu/xstrings v1.3.3/go.mod h1:y5/lhBue+AyNmUVz9RLU9xbLR0o4KIIExikq4ovT0aE=
 github.com/imdario/mergo v0.3.16 h1:wwQJbIsHYGMUyLSPrEq1CT16AhnhNJQ51+4fdHUnCl4=
