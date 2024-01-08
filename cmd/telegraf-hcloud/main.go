@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/influxdata/telegraf/plugins/common/shim"
-	_ "github.owncloud.com/owncloud-ops/telegraf-hcloud/plugins/inputs/hcloud"
+	_ "github.com/owncloud-ops/telegraf-hcloud/plugins/inputs/hcloud"
 )
 
 const defaultPollInterval = 1 * time.Minute

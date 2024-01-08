@@ -1,4 +1,4 @@
-module github.owncloud.com/owncloud-ops/telegraf-hcloud
+module github.com/owncloud-ops/telegraf-hcloud
 
 go 1.21
 

@@ -52,9 +52,6 @@ hcloud_load_balancer,location=nbg1,name=download max_connections=10000i,bandwidt
 Make sure you have a working Go environment, for further reference or a guide take a look at the [install instructions](https://golang.org/doc/install.html). This project requires Go >= v1.21.
 
 ```Shell
-git clone https://github.owncloud.com/owncloud-ops/telegraf-hcloud.git
-cd telegraf-hcloud
-
 make build
 ./dist/telegraf-hcloud --help
 ```
