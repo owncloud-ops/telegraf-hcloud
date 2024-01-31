@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	github.com/hetznercloud/hcloud-go/v2 v2.6.0
-	github.com/influxdata/telegraf v1.29.3
+	github.com/influxdata/telegraf v1.29.4
 )
 
 require (
@@ -17,13 +17,13 @@ require (
 	github.com/benbjohnson/clock v1.3.5 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
-	github.com/compose-spec/compose-go v1.20.0 // indirect
+	github.com/compose-spec/compose-go v1.20.2 // indirect
 	github.com/coreos/go-semver v0.3.1 // indirect
 	github.com/fatih/color v1.16.0 // indirect
 	github.com/gobwas/glob v0.2.3 // indirect
 	github.com/golang-jwt/jwt/v5 v5.2.0 // indirect
 	github.com/google/cel-go v0.18.1 // indirect
-	github.com/gosnmp/gosnmp v1.36.1 // indirect
+	github.com/gosnmp/gosnmp v1.37.0 // indirect
 	github.com/influxdata/toml v0.0.0-20190415235208-270119a8ce65 // indirect
 	github.com/klauspost/compress v1.17.4 // indirect
 	github.com/klauspost/pgzip v1.2.6 // indirect
