@@ -49,7 +49,7 @@ hcloud_load_balancer,location=nbg1,name=download max_connections=10000i,bandwidt
 
 ## Build
 
-Make sure you have a working Go environment, for further reference or a guide take a look at the [install instructions](https://golang.org/doc/install.html). This project requires Go >= v1.21.
+Make sure you have a working Go environment, for further reference or a guide take a look at the [install instructions](https://golang.org/doc/install.html).
 
 ```Shell
 make build
