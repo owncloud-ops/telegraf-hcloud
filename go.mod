@@ -1,6 +1,6 @@
 module github.com/owncloud-ops/telegraf-hcloud
 
-go 1.21
+go 1.22
 
 require (
 	github.com/hetznercloud/hcloud-go/v2 v2.6.0
