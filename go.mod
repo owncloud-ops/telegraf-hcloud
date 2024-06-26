@@ -3,7 +3,7 @@ module github.com/owncloud-ops/telegraf-hcloud
 go 1.22
 
 require (
-	github.com/hetznercloud/hcloud-go/v2 v2.6.0
+	github.com/hetznercloud/hcloud-go/v2 v2.10.2
 	github.com/influxdata/telegraf v1.29.5
 )
 
