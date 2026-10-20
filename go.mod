@@ -1,6 +1,6 @@
 module github.com/owncloud-ops/telegraf-hcloud
 
-go 1.22
+go 1.24
 
 require (
 	github.com/hetznercloud/hcloud-go/v2 v2.6.0
@@ -26,7 +26,7 @@ require (
 	github.com/google/cel-go v0.18.1 // indirect
 	github.com/gosnmp/gosnmp v1.37.0 // indirect
 	github.com/influxdata/toml v0.0.0-20190415235208-270119a8ce65 // indirect
-	github.com/klauspost/compress v1.17.6 // indirect
+	github.com/klauspost/compress v1.18.7 // indirect
 	github.com/klauspost/pgzip v1.2.6 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
